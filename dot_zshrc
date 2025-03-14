@@ -2,3 +2,4 @@
 export PATH=${PATH}:${HOME}/.local/bin
 eval "$(starship init zsh)"
 $(uv generate-shell-completion zsh)
+source ${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.zsh
