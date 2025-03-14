@@ -1,0 +1,25 @@
+#!/bin/bash
+
+{{ if eq .chezmoi.os "darwin" }}
+
+which uv || curl -LsSf https://astral.sh/uv/install.sh | sh
+which starship || curl -sS https://starship.rs/install.sh | sh
+
+{{ else if eq .chezmoi.os "linux" }}
+
+{{ if eq .chezmoi.osRelease.id "debian" }}
+
+sudo apt update
+sudo apt install -y zsh
+sudo chsh $USER -s /bin/zsh
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+
+{{ end }}
+
+which uv || curl -LsSf https://astral.sh/uv/install.sh | sh
+which starship || curl -sS https://starship.rs/install.sh | sh
+
+{{ end }}
