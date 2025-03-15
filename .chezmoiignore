@@ -2,5 +2,5 @@
 Library/Application Support/*
 {{ end }}
 {{ if ne .chezmoi.os "linux" }}
-.config/Code/User/settings.json
+.config/Code/User/*
 {{ end }}
