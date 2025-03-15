@@ -1,28 +1,31 @@
 {
     "markdown-preview-enhanced.codeBlockTheme": "auto.css",
     "markdown-preview-enhanced.previewTheme": "solarized-dark.css",
-    "[toml]": {
-        "editor.defaultFormatter": "tamasfe.even-better-toml",
-        "editor.formatOnSave": true
-    },
     "[python]": {
-        "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
             "source.fixAll": "explicit",
             "source.organizeImports": "explicit"
         },
-        "editor.defaultFormatter": "charliermarsh.ruff"
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true
     },
     "python.analysis.typeCheckingMode": "basic",
     "autoDocstring.docstringFormat": "google-notypes",
     "[json][jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": true
     },
     "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
+        "editor.defaultFormatter": "redhat.vscode-yaml",
+        "editor.formatOnSave": true
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml",
+        "editor.formatOnSave": true
     },
     "[shellscript]": {
-        "editor.defaultFormatter": "foxundermoon.shell-format"
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.formatOnSave": true
     },
     "editor.fontFamily": "'RobotoMonoJP-Mono'",
     "editor.fontSize": 14,
