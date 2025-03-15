@@ -1,4 +1,5 @@
 #!/bin/bash
+# Required: curl, git
 
 {{ if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") }}
 
@@ -9,6 +10,7 @@ if ! command -v starship > /dev/null 2>&1; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y
 fi
 
+# install zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
 if [ ! -d $ZINIT_HOME/.git ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
@@ -19,13 +21,14 @@ fi
 
 {{ if eq .chezmoi.os "darwin" }}
 
+# install font
 mkdir -p ~/Library/Fonts
 curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo ~/Library/Fonts/RobotoMonoJP-Mono-Regular.ttf
 fc-cache
 
 {{ else if eq .chezmoi.os "linux" }}
 
-{{ if eq .chezmoi.osRelease.idLike "debian" }}
+{{   if eq .chezmoi.osRelease.idLike "debian" }}
 
 # install zsh
 if ! command -v zsh > /dev/null 2>&1; then
@@ -34,11 +37,16 @@ if ! command -v zsh > /dev/null 2>&1; then
     sudo chsh $USER -s /bin/zsh
 fi
 
+# install locale
+if ! apt list --installed 2>/dev/null | grep -q locales-all; then
+    sudo apt install -y locales-all
+    locale-gen en_US.UTF-8
+fi
 
-{{ end }}
+{{   end }}
 
 if [ ! -d /.dockerenv ]; then
-    # font
+    # install font
     mkdir -p ~/.fonts
     curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo ~/.fonts/RobotoMonoJP-Mono-Regular.ttf
     fc-cache
