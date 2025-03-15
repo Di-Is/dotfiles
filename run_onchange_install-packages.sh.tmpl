@@ -1,7 +1,6 @@
+{{- if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
 #!/bin/bash
 # Required: curl, git
-
-{{ if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") }}
 
 if ! command -v uv > /dev/null 2>&1; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
