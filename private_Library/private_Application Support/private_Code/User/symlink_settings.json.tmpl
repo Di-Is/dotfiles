@@ -1,1 +1,1 @@
-{{ .chezmoi.sourceDir }}/settings.json
+{{- if eq .chezmoi.os "darwin" -}}{{ .chezmoi.sourceDir }}/settings.json{{- end -}}
