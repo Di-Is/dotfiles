@@ -1,7 +1,7 @@
 settings.json
 {{ if ne .chezmoi.os "darwin" }}
-Application Support/Code/User/symlink_settings.json.tmpl
+Library/Application Support/Code/User/settings.json
 {{ end }}
 {{ if ne .chezmoi.os "linux" }}
-.config/Code/User/symlink_settings.json.tmpl
+.config/Code/User/settings.json
 {{ end }}
