@@ -1,0 +1,33 @@
+#!/usr/bin/env /bin/sh
+# uv python script for starship
+
+# 1. Recursively search upward from the current directory for a ".venv" directory
+#    and if found, extract the version_info from the pyvenv.cfg file inside it.
+current_dir=$(pwd)
+while [ "$current_dir" != "/" ]; do
+  if [ -d "$current_dir/.venv" ] && [ -f "$current_dir/.venv/pyvenv.cfg" ]; then
+    version=$(grep '^version_info[[:space:]]*=' "$current_dir/.venv/pyvenv.cfg" | sed 's/.*=[[:space:]]*//')
+    if [ -n "$version" ]; then
+      echo v"$version"
+      exit 0
+    fi
+  fi
+  current_dir=$(dirname "$current_dir")
+done
+
+# 2. If not found, recursively search upward from the current directory for a ".python-version" file.
+current_dir=$(pwd)
+while [ "$current_dir" != "/" ]; do
+  if [ -f "$current_dir/.python-version" ]; then
+    cat "$current_dir/.python-version" | sed -e 's/^/v/'
+    exit 0
+  fi
+  current_dir=$(dirname "$current_dir")
+done
+
+# 3. Fallback to the existing behavior if neither condition above matches.
+if [ -n "$PYENV_VERSION" ]; then
+  echo "$PYENV_VERSION"
+else
+  uv run python --version | sed -e 's/Python //g' -e 's/^/v/'
+fi

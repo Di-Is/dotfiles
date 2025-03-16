@@ -15,6 +15,11 @@ format = '[$symbol]($style) '
 style = 'green bold dimmed'
 
 [python]
-format = 'via [${symbol}(${version})\(uv\)]($style)'
-pyenv_version_name = true
+disabled = true
 
+[custom.uv]
+command = 'get_python_version'
+when = 'find_python_project'
+style = 'yellow bold'
+symbol = '🐍 '
+format = 'via [$symbol($output )]($style)'
