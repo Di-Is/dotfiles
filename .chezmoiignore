@@ -7,9 +7,9 @@ Library
 {{ end }}
 {{ if or (ne .chezmoi.os "darwin") (ne .chezmoi.os "linux") }}
 .zshrc
-.chezmoiscripts/unix
+.chezmoiscripts/unix/**
 {{ end }}
 {{ if ne .chezmoi.os "windows" }}
 AppData
-.chezmoiscripts/windows
+.chezmoiscripts/windows/**
 {{ end }}
