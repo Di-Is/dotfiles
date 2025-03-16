@@ -10,6 +10,7 @@
         "editor.formatOnSave": true
     },
     "python.analysis.typeCheckingMode": "basic",
+    "python.terminal.activateEnvironment": false,
     "autoDocstring.docstringFormat": "google-notypes",
     "[json][jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features",
