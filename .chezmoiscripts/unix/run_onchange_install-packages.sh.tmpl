@@ -6,7 +6,7 @@ if ! command -v uv > /dev/null 2>&1; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
 if ! command -v starship > /dev/null 2>&1; then
-    curl -sS https://starship.rs/install.sh | sh -s -- -y
+    curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
 fi
 
 # install zinit
@@ -21,9 +21,12 @@ fi
 {{ if eq .chezmoi.os "darwin" }}
 
 # install font
-mkdir -p ~/Library/Fonts
-curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo ~/Library/Fonts/RobotoMonoJP-Mono-Regular.ttf
-fc-cache
+FONT_DIR=~/Library/Fonts
+mkdir -p ${FONT_DIR}
+if [ ! -f "${FONT_DIR}/RobotoMonoJP-Mono-Regular.ttf" ]; then
+    curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo $FONT_DIR/RobotoMonoJP-Mono-Regular.ttf
+    fc-cache
+fi
 
 {{ else if eq .chezmoi.os "linux" }}
 
