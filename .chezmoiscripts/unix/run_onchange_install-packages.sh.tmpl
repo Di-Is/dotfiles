@@ -37,6 +37,9 @@ if ! command -v zsh > /dev/null 2>&1; then
 fi
 
 # install locale
+if ! apt list --installed 2>/dev/null | grep -q locales; then
+    sudo apt install -y locales
+fi
 if ! apt list --installed 2>/dev/null | grep -q locales-all; then
     sudo apt install -y locales-all
     locale-gen en_US.UTF-8
@@ -44,7 +47,7 @@ fi
 
 {{   end }}
 
-if [ ! -d /.dockerenv ]; then
+if [ ! -f /.dockerenv ]; then
     # install font
     mkdir -p ~/.fonts
     curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo ~/.fonts/RobotoMonoJP-Mono-Regular.ttf
