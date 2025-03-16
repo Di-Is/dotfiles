@@ -5,3 +5,9 @@ Library
 {{ if ne .chezmoi.os "linux" }}
 .config/Code
 {{ end }}
+{{ if or (ne .chezmoi.os "darwin") (ne .chezmoi.os "linux") }}
+.zshrc
+{{ end }}
+{{ if ne .chezmoi.os "windows" }}
+AppData
+{{ end }}
