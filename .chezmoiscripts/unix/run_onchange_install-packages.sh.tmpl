@@ -5,6 +5,9 @@
 if ! command -v uv > /dev/null 2>&1; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
+if ! command -v task > /dev/null 2>&1; then
+    sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
+fi
 if ! command -v starship > /dev/null 2>&1; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
 fi
