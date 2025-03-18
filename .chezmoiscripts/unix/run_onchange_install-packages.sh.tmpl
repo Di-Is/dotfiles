@@ -19,6 +19,13 @@ if [ ! -d $ZINIT_HOME/.git ]; then
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+# install zsh-autosuggestions
+ZSH_AUTOSUGGESTIONS_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/zsh-autosuggestions"
+if [ ! -d $ZSH_AUTOSUGGESTIONS_DIR ]; then
+    mkdir -p "$(dirname $ZSH_AUTOSUGGESTIONS_DIR)"
+    git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_AUTOSUGGESTIONS_DIR
+fi
+
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
