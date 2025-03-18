@@ -9,6 +9,9 @@
         "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true
     },
+    "terminal.integrated.defaultProfile.windows": "wsl",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "python.analysis.typeCheckingMode": "basic",
     "python.terminal.activateEnvironment": false,
     "autoDocstring.docstringFormat": "google-notypes",
@@ -24,11 +27,15 @@
         "editor.defaultFormatter": "tamasfe.even-better-toml",
         "editor.formatOnSave": true
     },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker",
+        "editor.formatOnSave": true
+    },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format",
         "editor.formatOnSave": true
     },
-    "editor.fontFamily": "'RobotoMonoJP-Mono'",
+    "editor.fontFamily": "RobotoMonoJP-Mono",
     "editor.fontSize": 14,
     "terminal.integrated.fontSize": 14
 }
