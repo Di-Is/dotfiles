@@ -17,7 +17,8 @@
     "autoDocstring.docstringFormat": "google-notypes",
     "[json][jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.detectIndentation": false
     },
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml",
