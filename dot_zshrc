@@ -4,6 +4,7 @@ eval "$(starship init zsh)"
 # uv shell completion tips (See. https://github.com/astral-sh/uv/issues/10707)
 autoload -Uz compinit && compinit
 eval "$(uv generate-shell-completion zsh)"
+eval "$(task --completion zsh)"
 
 source ${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.zsh
 zinit light zsh-users/zsh-completions
