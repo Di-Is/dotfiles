@@ -1,5 +1,6 @@
 # aliases
 alias uvr="uv run"
+alias uvrp="uv run python"
 alias uvs="uv sync"
 alias uvl="uv lock"
 alias uvtl="uv tool"
