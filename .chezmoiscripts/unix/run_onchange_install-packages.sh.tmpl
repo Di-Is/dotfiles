@@ -33,6 +33,7 @@ fi
 # install bat
 if ! command -v bat > /dev/null 2>&1; then
     brew install bat
+    ln -s /usr/bin/batcat ~/.local/bin/bat
 fi
 
 {{ else if eq .chezmoi.os "linux" }}
