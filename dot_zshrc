@@ -5,6 +5,7 @@ eval "$(starship init zsh)"
 
 source ${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.zsh
 zinit light zsh-users/zsh-completions
+zinit light z-shell/F-Sy-H
 
 ZSHHOME="${HOME}/.zsh.d"
 if [ -d $ZSHHOME -a -r $ZSHHOME -a \
