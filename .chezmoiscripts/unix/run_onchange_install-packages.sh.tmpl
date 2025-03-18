@@ -33,7 +33,6 @@ fi
 # install bat
 if ! command -v bat > /dev/null 2>&1; then
     brew install bat
-    ln -s /usr/bin/batcat ~/.local/bin/bat
 fi
 
 {{ else if eq .chezmoi.os "linux" }}
@@ -50,6 +49,7 @@ fi
 if ! command -v bat > /dev/null 2>&1; then
     sudo apt update
     sudo apt install -y bat
+    ln -s /usr/bin/batcat ~/.local/bin/bat
 fi
 
 # install locale
