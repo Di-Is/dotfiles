@@ -7,6 +7,8 @@ source ${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.zsh
 zinit light zsh-users/zsh-completions
 zinit light z-shell/F-Sy-H
 
+source ${XDG_DATA_HOME:-${HOME}/.local/share}/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 ZSHHOME="${HOME}/.zsh.d"
 if [ -d $ZSHHOME -a -r $ZSHHOME -a \
     -x $ZSHHOME ]; then
