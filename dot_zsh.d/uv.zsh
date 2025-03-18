@@ -11,6 +11,4 @@ alias uvrm="uv remove"
 alias upsu="uv self update"
 
 # shell completion
-# uv shell completion tips (See. https://github.com/astral-sh/uv/issues/10707)
-autoload -Uz compinit && compinit
 eval "$(uv generate-shell-completion zsh)"

@@ -1,3 +1,5 @@
+autoload -Uz compinit
+compinit
 export PATH=${PATH}:${HOME}/.local/bin
 eval "$(starship init zsh)"
 
