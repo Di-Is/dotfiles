@@ -12,7 +12,6 @@
     "terminal.integrated.defaultProfile.windows": "wsl",
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.defaultProfile.linux": "zsh",
-    "python.analysis.typeCheckingMode": "basic",
     "python.terminal.activateEnvironment": false,
     "autoDocstring.docstringFormat": "google-notypes",
     "[json][jsonc]": {
