@@ -12,7 +12,7 @@ if ! command -v starship > /dev/null 2>&1; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
 fi
 if ! command -v rustup >  /dev/null 2>&1; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -- -y
 fi
 if ! command -v eza >  /dev/null 2>&1; then
     cargo install eza
