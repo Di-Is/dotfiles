@@ -3,7 +3,7 @@ target = "~/.local/bin"
 
 ["ClementTsang/bottom"]
 all = true
-asset_filters = ["^musl"]
+asset_filters = ["^musl", "^2-17"]
 
 ["sharkdp/bat"]
 asset_filters = ["^musl"]
