@@ -12,7 +12,6 @@ if ! command -v starship > /dev/null 2>&1; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
 fi
 if ! command -v bat > /dev/null 2>&1; then
-    sudo apt update
     curl https://i.jpillora.com/sharkdp/bat@latest | bash
     mv ~/.local/bin/bat
 fi
