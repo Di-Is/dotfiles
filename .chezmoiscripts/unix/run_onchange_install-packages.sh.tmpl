@@ -15,6 +15,14 @@ if ! command -v bat > /dev/null 2>&1; then
     curl https://i.jpillora.com/sharkdp/bat@latest | bash
     mv bat ~/.local/bin/bat
 fi
+if ! command -v btm > /dev/null 2>&1; then
+    curl https://i.jpillora.com/ClementTsang/bottom@latest | bash
+    mv bottom ~/.local/bin/btm
+fi
+if ! command -v dust > /dev/null 2>&1; then
+    curl https://i.jpillora.com/bootandy/dust@latest | bash
+    mv dust ~/.local/bin/dust
+fi
 
 # install zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
