@@ -7,3 +7,6 @@ asset_filters = ["^musl"]
 
 ["sharkdp/bat"]
 asset_filters = ["^musl"]
+
+["bootandy/dust"]
+asset_filters = ["^musl"]
