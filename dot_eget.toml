@@ -13,3 +13,6 @@ asset_filters = ["^musl"]
 
 ["imsnif/bandwhich"]
 asset_filters = ["^musl"]
+
+["eza-community/eza"]
+asset_filters = ["^musl", "^.zip"]
