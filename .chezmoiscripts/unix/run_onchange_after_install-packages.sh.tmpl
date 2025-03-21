@@ -2,9 +2,10 @@
 #!/bin/bash
 # Required: curl, git
 
-curl https://zyedidia.github.io/eget.sh | sh
-mv eget ~/.local/bin/
-
+if ! command -v eget > /dev/null 2>&1; then
+    curl https://zyedidia.github.io/eget.sh | sh
+    mv eget ~/.local/bin/
+fi
 if ! command -v uv > /dev/null 2>&1; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
