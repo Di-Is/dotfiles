@@ -1,0 +1,6 @@
+[global]
+target = "~/.local/bin"
+
+["ClementTsang/bottom"]
+target = "~/.local/bin"
+all = true

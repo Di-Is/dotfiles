@@ -2,6 +2,9 @@
 #!/bin/bash
 # Required: curl, git
 
+curl https://zyedidia.github.io/eget.sh | sh
+mv eget ~/.local/bin/
+
 if ! command -v uv > /dev/null 2>&1; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
@@ -12,12 +15,10 @@ if ! command -v starship > /dev/null 2>&1; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
 fi
 if ! command -v bat > /dev/null 2>&1; then
-    curl https://i.jpillora.com/sharkdp/bat@latest | bash
-    mv bat ~/.local/bin/bat
+    eget sharkdp/bat
 fi
 if ! command -v btm > /dev/null 2>&1; then
-    curl https://i.jpillora.com/ClementTsang/bottom@latest | bash
-    mv bottom ~/.local/bin/btm
+    eget ClementTsang/bottom
 fi
 if ! command -v dust > /dev/null 2>&1; then
     curl https://i.jpillora.com/bootandy/dust@latest | bash
