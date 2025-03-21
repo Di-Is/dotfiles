@@ -10,3 +10,6 @@ asset_filters = ["^musl"]
 
 ["bootandy/dust"]
 asset_filters = ["^musl"]
+
+["imsnif/bandwhich"]
+asset_filters = ["^musl"]
