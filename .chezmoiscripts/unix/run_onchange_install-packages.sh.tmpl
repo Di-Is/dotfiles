@@ -11,6 +11,11 @@ fi
 if ! command -v starship > /dev/null 2>&1; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
 fi
+if ! command -v bat > /dev/null 2>&1; then
+    sudo apt update
+    curl https://i.jpillora.com/sharkdp/bat@latest
+    mv ~/.local/bin/bat
+fi
 
 # install zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
@@ -37,10 +42,6 @@ if [ ! -f "${FONT_DIR}/RobotoMonoJP-Mono-Regular.ttf" ]; then
     curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo $FONT_DIR/RobotoMonoJP-Mono-Regular.ttf
     fc-cache
 fi
-# install bat
-if ! command -v bat > /dev/null 2>&1; then
-    brew install bat
-fi
 # install eza
 if ! command -v eza > /dev/null 2>&1; then
     brew install eza
@@ -55,12 +56,6 @@ if ! command -v zsh > /dev/null 2>&1; then
     sudo apt update
     sudo apt install -y zsh
     sudo chsh $USER -s /bin/zsh
-fi
-# install bat
-if ! command -v bat > /dev/null 2>&1; then
-    sudo apt update
-    sudo apt install -y bat
-    ln -s /usr/bin/batcat ~/.local/bin/bat
 fi
 # install eza
 if ! command -v eza >  /dev/null 2>&1; then
