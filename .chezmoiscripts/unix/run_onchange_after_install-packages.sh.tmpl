@@ -5,9 +5,6 @@
 if ! command -v mise > /dev/null 2>&1; then
     curl https://mise.run | sh
 fi
-if ! command -v uv > /dev/null 2>&1; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-fi
 mise i
 
 # install zinit
