@@ -1,7 +1,7 @@
 [tools]
 bat = "latest"
 eza = "latest"
-bottom = "latest"
+"aqua:ClementTsang/bottom" = "latest"
 dust = "latest"
 "ubi:imsnif/bandwhich" = "latest"
 starship = "latest"
