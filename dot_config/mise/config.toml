@@ -6,3 +6,6 @@ dust = "latest"
 "ubi:imsnif/bandwhich" = "latest"
 starship = "latest"
 "ubi:go-task/task" = "latest"
+
+[settings]
+disable_tools = ["python"]
