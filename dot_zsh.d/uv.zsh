@@ -12,7 +12,7 @@ alias uvpip="uv pip"
 alias uvpy="uv python"
 alias uva="uv add"
 alias uvrm="uv remove"
-alias upsu="uv self update"
+alias uvsu="uv self update"
 
 # shell completion
 eval "$(uv generate-shell-completion zsh)"
