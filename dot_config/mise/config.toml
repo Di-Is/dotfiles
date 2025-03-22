@@ -7,6 +7,7 @@ dust = "latest"
 starship = "latest"
 "ubi:go-task/task" = "latest"
 usage = "latest"
+uv = "latest"
 
 [settings]
 disable_tools = ["python"]
