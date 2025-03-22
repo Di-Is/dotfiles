@@ -1,0 +1,7 @@
+[tools]
+bat = "latest"
+eza = "latest"
+bottom = "latest"
+dust = "latest"
+"ubi:imsnif/bandwhich" = "latest"
+starship = "latest"

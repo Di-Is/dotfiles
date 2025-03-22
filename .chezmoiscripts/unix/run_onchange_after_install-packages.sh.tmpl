@@ -2,9 +2,8 @@
 #!/bin/bash
 # Required: curl, git
 
-if ! command -v eget > /dev/null 2>&1; then
-    curl https://zyedidia.github.io/eget.sh | sh
-    mv eget ~/.local/bin/
+if ! command -v mise > /dev/null 2>&1; then
+    curl https://mise.run | sh
 fi
 if ! command -v uv > /dev/null 2>&1; then
     curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -12,22 +11,6 @@ fi
 if ! command -v task > /dev/null 2>&1; then
     sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
 fi
-if ! command -v starship > /dev/null 2>&1; then
-    curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
-fi
-if ! command -v bat > /dev/null 2>&1; then
-    eget sharkdp/bat
-fi
-if ! command -v btm > /dev/null 2>&1; then
-    eget ClementTsang/bottom
-fi
-if ! command -v dust > /dev/null 2>&1; then
-    eget bootandy/dust
-fi
-if ! command -v bandwhich > /dev/null 2>&1; then
-    eget imsnif/bandwhich
-fi
-
 
 # install zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
@@ -54,10 +37,6 @@ if [ ! -f "${FONT_DIR}/RobotoMonoJP-Mono-Regular.ttf" ]; then
     curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo $FONT_DIR/RobotoMonoJP-Mono-Regular.ttf
     fc-cache
 fi
-# install eza
-if ! command -v eza > /dev/null 2>&1; then
-    brew install eza
-fi
 
 {{ else if eq .chezmoi.os "linux" }}
 
@@ -69,11 +48,6 @@ if ! command -v zsh > /dev/null 2>&1; then
     sudo apt install -y zsh
     sudo chsh $USER -s /bin/zsh
 fi
-# install eza
-if ! command -v eza >  /dev/null 2>&1; then
-    eget eza-community/eza
-fi
-
 
 # install locale
 if ! apt list --installed 2>/dev/null | grep -q locales; then
