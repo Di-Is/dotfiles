@@ -11,6 +11,7 @@ fi
 if ! command -v task > /dev/null 2>&1; then
     sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
 fi
+mise i
 
 # install zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
