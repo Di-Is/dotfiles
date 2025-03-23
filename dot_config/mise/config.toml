@@ -8,6 +8,8 @@ starship = "latest"
 "ubi:go-task/task" = "latest"
 usage = "latest"
 uv = "latest"
+yq = "latest"
+jq = "latest"
 
 [settings]
 disable_tools = ["python"]
