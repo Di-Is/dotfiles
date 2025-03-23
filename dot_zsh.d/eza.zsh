@@ -1,6 +1,6 @@
 alias l='eza'
 alias la='eza --all'
-alias ll='eza --group --header --group-directories-first --long'
+alias ll='eza --all --group --header --group-directories-first --long'
 alias lg='eza --group --header --group-directories-first --long --git --git-ignore'
 alias le='eza --group --header --group-directories-first --long --extended'
 alias lt='eza --group --header --group-directories-first --tree --level LEVEL'
