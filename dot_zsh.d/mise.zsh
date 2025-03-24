@@ -9,7 +9,6 @@ alias mt='mise task'
 alias mi='mise install'
 alias ml='mise list'
 
-# コマンド`t`の定義
 t() {
   if [ $# -eq 0 ]; then
     mise task
