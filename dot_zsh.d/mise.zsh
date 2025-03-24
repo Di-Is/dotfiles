@@ -9,6 +9,7 @@ alias mt='mise task'
 alias mi='mise install'
 alias ml='mise list'
 
+# コマンド`t`の定義
 t() {
   if [ $# -eq 0 ]; then
     mise task
@@ -16,3 +17,13 @@ t() {
     mise run "$@"
   fi
 }
+
+_t() {
+  if (( CURRENT == 1 )); then
+    return 0
+  fi
+  words=(mise run "${words[@]:1}")
+  _mise
+}
+
+compdef _t t
