@@ -1,1 +1,1 @@
-alias bandwhich="sudo $(which bandwhich)"
+alias bd="sudo $(which bandwhich)"
