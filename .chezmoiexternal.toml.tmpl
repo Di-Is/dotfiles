@@ -1,0 +1,5 @@
+{{- if or (eq .chezmoi.os "darwin") (eq .chezmoi.os "linux") -}}
+[".local/share/zi"]
+type = "git-repo"
+url = "https://github.com/z-shell/zi.git"
+{{- end -}}

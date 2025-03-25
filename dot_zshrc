@@ -1,14 +1,15 @@
 autoload -Uz compinit
-compinit
+(( ${+_comps} )) && _comps[zi]=_zi
+
 export PATH=${PATH}:${HOME}/.local/bin:${HOME}/.cargo/bin
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 
-source ${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.zsh
-zinit light zsh-users/zsh-completions
-zinit light z-shell/F-Sy-H
+source ${HOME}/.local/share/zi/zi.zsh
+zi light zsh-users/zsh-completions
+zi light z-shell/F-Sy-H
 
-source ${XDG_DATA_HOME:-${HOME}/.local/share}/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ${HOME}/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ZSHHOME="${HOME}/.zsh.d"
 if [ -d $ZSHHOME -a -r $ZSHHOME -a \
