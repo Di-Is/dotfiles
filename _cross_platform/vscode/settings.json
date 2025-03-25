@@ -37,5 +37,9 @@
     },
     "editor.fontFamily": "RobotoMonoJP-Mono",
     "editor.fontSize": 14,
-    "terminal.integrated.fontSize": 14
+    "terminal.integrated.fontSize": 14,
+    "files.associations": {
+        "*.sh.tmpl": "sh",
+        "*.toml.tmpl": "toml"
+    }
 }
