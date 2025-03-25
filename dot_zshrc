@@ -4,14 +4,8 @@ compinit
 export PATH=${PATH}:${HOME}/.local/bin:${HOME}/.cargo/bin
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
+eval "$(sheldon source)"
 
-source ${HOME}/.local/share/zi/zi.zsh
-autoload -Uz _zi
-(( ${+_comps} )) && _comps[zi]=_zi
-
-zi light zsh-users/zsh-completions
-zi light z-shell/F-Sy-H
-zi light zsh-users/zsh-autosuggestions
 
 ZSHHOME="${HOME}/.zsh.d"
 if [ -d $ZSHHOME -a -r $ZSHHOME -a \

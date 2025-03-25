@@ -13,6 +13,7 @@ xh = "latest"
 uv = "latest"
 yq = "latest"
 jq = "latest"
+"ubi:rossmacarthur/sheldon" = "latest"
 
 [settings]
 disable_tools = ["python"]
