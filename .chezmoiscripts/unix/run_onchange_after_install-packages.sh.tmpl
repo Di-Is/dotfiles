@@ -5,21 +5,7 @@
 if ! command -v mise > /dev/null 2>&1; then
     curl https://mise.run | sh
 fi
-mise i
-
-# install zinit
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
-if [ ! -d $ZINIT_HOME/.git ]; then
-    mkdir -p "$(dirname $ZINIT_HOME)"
-    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
-# install zsh-autosuggestions
-ZSH_AUTOSUGGESTIONS_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}/zsh-autosuggestions"
-if [ ! -d $ZSH_AUTOSUGGESTIONS_DIR ]; then
-    mkdir -p "$(dirname $ZSH_AUTOSUGGESTIONS_DIR)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_AUTOSUGGESTIONS_DIR
-fi
+mise install
 
 {{ end }}
 
@@ -36,13 +22,6 @@ fi
 {{ else if eq .chezmoi.os "linux" }}
 
 {{   if eq .chezmoi.osRelease.idLike "debian" }}
-
-# install zsh
-if ! command -v zsh > /dev/null 2>&1; then
-    sudo apt update
-    sudo apt install -y zsh
-    sudo chsh $USER -s /bin/zsh
-fi
 
 # install locale
 if ! apt list --installed 2>/dev/null | grep -q locales; then
