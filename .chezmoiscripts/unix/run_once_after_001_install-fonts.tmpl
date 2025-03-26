@@ -9,8 +9,8 @@ FONT_DIR=~/Library/Fonts
 FONT_DIR=~/.fonts
 {{   end }}
 
-mkdir -p ${FONT_DIR}
 if [ ! -f "${FONT_DIR}/RobotoMonoJP-Mono-Regular.ttf" ] && [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && [ ! -f /var/run/.containerenv ]; then
+    mkdir -p ${FONT_DIR}
     curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo $FONT_DIR/RobotoMonoJP-Mono-Regular.ttf
     fc-cache
 fi
