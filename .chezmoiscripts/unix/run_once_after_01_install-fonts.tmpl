@@ -1,0 +1,18 @@
+{{- if ne .chezmoi.os "windows" -}}
+#!/bin/bash
+# Required: curl
+
+# install font
+{{   if eq .chezmoi.os "darwin" }}
+FONT_DIR=~/Library/Fonts
+{{   else if eq .chezmoi.os "linux" }}
+FONT_DIR=~/.fonts
+{{   end }}
+
+mkdir -p ${FONT_DIR}
+if [ ! -f "${FONT_DIR}/RobotoMonoJP-Mono-Regular.ttf" ] && [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && [ ! -f /var/run/.containerenv ]; then
+    curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo $FONT_DIR/RobotoMonoJP-Mono-Regular.ttf
+    fc-cache
+fi
+
+{{- end -}}
