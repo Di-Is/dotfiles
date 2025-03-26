@@ -1,4 +1,17 @@
 
+# activation
+cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}
+cache_file="$cache_dir/mise.zsh"
+if [[ ! -r "$cache_file" ]]; then
+  echo "A"
+  mkdir -p $cache_dir
+  mise activate zsh > $cache_file
+fi
+source "$cache_file"
+unset cache_dir cache
+
+# eval "$(mise activate zsh)"
+
 # shell completion
 on_demand_completion "mise" "mise completion zsh"
 
