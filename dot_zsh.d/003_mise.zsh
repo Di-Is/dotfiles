@@ -1,6 +1,6 @@
 
 # shell completion
-eval "$(mise completion zsh)"
+on_demand_completion "mise" "mise completion zsh"
 
 # alias
 alias m='mise'

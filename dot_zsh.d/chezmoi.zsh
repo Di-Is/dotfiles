@@ -3,4 +3,4 @@ alias cha='chezmoi apply'
 alias chu='chezmoi update'
 
 # shell completion
-eval "$(chezmoi completion zsh)"
+on_demand_completion "chezmoi" "chezmoi completion zsh"

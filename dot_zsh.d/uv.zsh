@@ -15,4 +15,4 @@ alias uvrm="uv remove"
 alias uvsu="uv self update"
 
 # shell completion
-eval "$(uv generate-shell-completion zsh)"
+on_demand_completion "uv" "uv generate-shell-completion zsh"
