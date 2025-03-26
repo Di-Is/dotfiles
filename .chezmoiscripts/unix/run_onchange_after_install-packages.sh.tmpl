@@ -11,25 +11,10 @@ mise install
 
 {{ if eq .chezmoi.os "darwin" }}
 
-# install font
-FONT_DIR=~/Library/Fonts
-mkdir -p ${FONT_DIR}
-if [ ! -f "${FONT_DIR}/RobotoMonoJP-Mono-Regular.ttf" ]; then
-    curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo $FONT_DIR/RobotoMonoJP-Mono-Regular.ttf
-    fc-cache
-fi
-
 {{ else if eq .chezmoi.os "linux" }}
 
 {{   if eq .chezmoi.osRelease.idLike "debian" }}
 
 {{   end }}
-
-if [ ! -f /.dockerenv ]; then
-    # install font
-    mkdir -p ~/.fonts
-    curl https://github.com/mjun0812/RobotoMonoJP/releases/download/v5.0.0/RobotoMonoJP-Mono-Regular.ttf -Lo ~/.fonts/RobotoMonoJP-Mono-Regular.ttf
-    fc-cache
-fi
 
 {{ end }}
