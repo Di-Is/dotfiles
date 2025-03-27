@@ -35,10 +35,13 @@ _compinit
 
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
+apply = ["defer"]
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 use = ['{{ name }}.zsh']
+apply = ["defer"]
 
 [plugins.F-Sy-H]
 github = "z-shell/F-Sy-H"
+apply = ["defer"]
