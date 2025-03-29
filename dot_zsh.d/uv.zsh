@@ -16,3 +16,4 @@ alias uvsu="uv self update"
 
 # shell completion
 on_demand_completion "uv" "uv generate-shell-completion zsh"
+on_demand_completion "uvx" "uvx --generate-shell-completion zsh"
