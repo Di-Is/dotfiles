@@ -10,7 +10,7 @@ alias mi='mise install'
 alias ml='mise list'
 
 # shell completion
-on_demand_completion "mise" "mise completion zsh"
+on_demand_completion "mise"
 
 t() {
   if [ $# -eq 0 ]; then
