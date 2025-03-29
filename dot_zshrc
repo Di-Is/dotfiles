@@ -1,5 +1,8 @@
 
 export PATH=${PATH}:${HOME}/.local/bin:${HOME}/.cargo/bin
+export HISTSIZE=100000
+export SAVEHIST=10000
+setopt extended_history
 
 # zcompile
 # Ref. https://zenn.dev/fuzmare/articles/zsh-source-zcompile-all
