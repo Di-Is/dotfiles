@@ -1,6 +1,6 @@
 # usage: on_demand_completion <command_name> [completion_command]
-#   command_name: 補完を行うコマンド名
-#   completion_command: 補完を行うコマンド (default: "<command_name> completion zsh")
+#   command_name:
+#   completion_command: (default: "<command_name> completion zsh")
 # Example:
 #   on_demand_completion 'docker'
 #   on_demand_completion 'gh' 'gh completion -s zsh'
