@@ -41,5 +41,6 @@
     "files.associations": {
         "*.sh.tmpl": "sh",
         "*.toml.tmpl": "toml"
-    }
+    },
+    "files.insertFinalNewline": true
 }
