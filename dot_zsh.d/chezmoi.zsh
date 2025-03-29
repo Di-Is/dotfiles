@@ -1,3 +1,5 @@
+
+# alias
 alias ch='chezmoi'
 alias cha='chezmoi apply'
 alias chu='chezmoi update'
