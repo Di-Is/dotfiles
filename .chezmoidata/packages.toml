@@ -1,0 +1,7 @@
+[packages.apt]
+[packages.apt.common]
+packages = ["git", "zsh", "sudo"]
+
+[packages.yum]
+[packages.yum.common]
+packages = ["git", "zsh", "sudo", "util-linux-user"]

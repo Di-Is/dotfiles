@@ -1,0 +1,29 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+{{     if eq .chezmoi.osRelease.idLike "debian" }}
+packages=(
+    {{ range $package := .packages.apt.common.packages }}
+    "{{ $package }}"
+    {{ end }}
+)
+
+if ! command -v sudo > /dev/null 2>&1; then
+    apt install ${packages[@]}
+else
+    sudo apt install ${packages[@]}
+fi
+{{     else if  eq .chezmoi.osRelease.idLike "rhel centos fedora" }}
+packages=(
+    {{ range $package := .packages.yum.common.packages }}
+    "{{ $package }}"
+    {{ end }}
+)
+
+if ! command -v sudo > /dev/null 2>&1; then
+    yum install ${packages[@]}
+else
+    sudo yum install ${packages[@]}
+fi
+{{     end }}
+{{- end -}}
