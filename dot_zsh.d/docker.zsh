@@ -1,4 +1,3 @@
-
 # alias
 alias d="docker"
 alias dr="docker run"
@@ -11,4 +10,6 @@ alias dcu="docker compose up"
 alias dcd="docker compose down"
 
 # shell completion
-on_demand_completion docker
+if ! command -v docker >/dev/null 2>&1; then
+    on_demand_completion docker
+fi
