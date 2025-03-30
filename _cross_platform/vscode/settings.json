@@ -42,5 +42,14 @@
         "*.sh.tmpl": "sh",
         "*.toml.tmpl": "toml"
     },
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "search.exclude": {
+        "**/.git": true,
+        "**/.vscode": true,
+        "**/*.csv": true,
+        "**/*.svg": true,
+        "**/CHANGELOG*": true,
+        "**/LICENSE*": true,
+        "**/uv.lock": true
+    }
 }
