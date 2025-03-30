@@ -10,7 +10,7 @@ fi
 {{-     else if  eq .chezmoi.osRelease.idLike "redhat" -}}
 if ! command -v zsh > /dev/null 2>&1; then
     sudo yum update
-    sudo aptyum install -y zsh
+    sudo yum install -y zsh
     sudo chsh $USER -s /bin/zsh
 fi
 {{-     end -}}
