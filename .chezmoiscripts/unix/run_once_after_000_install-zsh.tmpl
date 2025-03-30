@@ -1,10 +1,17 @@
-{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.idLike "debian") -}}
+{{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 
+{{-     if eq .chezmoi.osRelease.idLike "debian" -}}
 if ! command -v zsh > /dev/null 2>&1; then
     sudo apt update
     sudo apt install -y zsh
     sudo chsh $USER -s /bin/zsh
 fi
-
+{{-     else if  eq .chezmoi.osRelease.idLike "redhat" -}}
+if ! command -v zsh > /dev/null 2>&1; then
+    sudo yum update
+    sudo aptyum install -y zsh
+    sudo chsh $USER -s /bin/zsh
+fi
+{{-     end -}}
 {{- end -}}
