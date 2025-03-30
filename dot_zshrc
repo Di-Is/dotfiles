@@ -4,21 +4,6 @@ export HISTSIZE=100000
 export SAVEHIST=10000
 setopt extended_history
 
-# zcompile
-# Ref. https://zenn.dev/fuzmare/articles/zsh-source-zcompile-all
-function source {
-  ensure_zcompiled $1
-  builtin source $1
-}
-function ensure_zcompiled {
-  local compiled="$1.zwc"
-  if [[ ! -r "$compiled" || "$1" -nt "$compiled" ]]; then
-    echo "Compiling $1"
-    zcompile $1
-  fi
-}
-ensure_zcompiled ~/.zshrc
-
 ZSHHOME="${HOME}/.zsh.d"
 if [ -d $ZSHHOME -a -r $ZSHHOME -a \
     -x $ZSHHOME ]; then
