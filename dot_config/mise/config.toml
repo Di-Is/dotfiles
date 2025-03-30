@@ -1,21 +1,23 @@
 [tools]
+"aqua:ClementTsang/bottom" = "latest"
 bat = "latest"
 eza = "latest"
-"aqua:ClementTsang/bottom" = "latest"
 dust = "latest"
-"ubi:imsnif/bandwhich" = "latest"
-starship = "latest"
-usage = "latest"
-hyperfine = "latest"
 fd = "latest"
-duf = "latest"
-xh = "latest"
-uv = "latest"
-yq = "latest"
-jq = "latest"
-"ubi:rossmacarthur/sheldon" = "latest"
-zoxide = "latest"
 fzf = "latest"
+
+hyperfine = "latest"
+jq = "latest"
+duf = "latest"
+starship = "latest"
+"ubi:imsnif/bandwhich" = "latest"
+"ubi:rossmacarthur/sheldon" = "latest"
+"ubi:tldr-pages/tlrc" = { version = "latest", exe = "tldr" }
+usage = "latest"
+uv = "latest"
+xh = "latest"
+yq = "latest"
+zoxide = "latest"
 
 [settings]
 disable_tools = ["python"]
