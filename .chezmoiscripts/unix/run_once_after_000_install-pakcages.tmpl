@@ -9,9 +9,9 @@ packages=(
 )
 
 if ! command -v sudo > /dev/null 2>&1; then
-    apt install ${packages[@]}
+    apt install -y ${packages[@]}
 else
-    sudo apt install ${packages[@]}
+    sudo apt install -y ${packages[@]}
 fi
 {{     else if  eq .chezmoi.osRelease.idLike "rhel centos fedora" }}
 packages=(
@@ -21,9 +21,9 @@ packages=(
 )
 
 if ! command -v sudo > /dev/null 2>&1; then
-    yum install ${packages[@]}
+    yum install -y ${packages[@]}
 else
-    sudo yum install ${packages[@]}
+    sudo yum install -y ${packages[@]}
 fi
 {{     end }}
 {{- end -}}
