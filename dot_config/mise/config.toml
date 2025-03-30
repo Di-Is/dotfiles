@@ -5,7 +5,6 @@ eza = "latest"
 dust = "latest"
 fd = "latest"
 fzf = "latest"
-
 hyperfine = "latest"
 jq = "latest"
 duf = "latest"
