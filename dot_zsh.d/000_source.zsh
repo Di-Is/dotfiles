@@ -11,4 +11,6 @@ function ensure_zcompiled {
     zcompile $1
   fi
 }
+
+ensure_zcompiled $0
 ensure_zcompiled ~/.zshrc
