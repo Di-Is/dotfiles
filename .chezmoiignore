@@ -14,3 +14,20 @@ Library
 AppData
 .chezmoiscripts/windows/**
 {{ end }}
+
+{{ if eq (env "CHEZMOI_REPLACEMENTS_UNIX_CLI" | default "true") "false" -}}
+.zsh.d/dust.zsh
+.zsh.d/duf.zsh
+.zsh.d/eza.zsh
+.zsh.d/bandwhich.zsh
+.zsh.d/fd.zsh
+.zsh.d/zoxide.zsh
+{{- end }}
+
+{{ if eq (env "CHEZMOI_DOCKER" | default "true") "false" -}}
+.zsh.d/docker.zsh
+{{- end }}
+
+{{ if eq (env "CHEZMOI_PYTHON" | default "true") "false" -}}
+.zsh.d/uv.zsh
+{{- end }}

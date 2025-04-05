@@ -1,0 +1,47 @@
+[tools]
+# Core
+"ubi:rossmacarthur/sheldon" = "latest"
+starship = "latest"
+usage = "latest"
+
+# Replacements for Unix CLI tools
+{{ if eq (env "CHEZMOI_REPLACEMENTS_UNIX_CLI" | default "true") "true" -}}
+bat = "latest"
+bottom = "latest"
+duf = "latest"
+dust = "latest"
+eza = "latest"
+fd = "latest"
+fzf = "latest"
+hyperfine = "latest"
+"ubi:tldr-pages/tlrc" = { version = "latest", exe = "tldr" }
+"ubi:imsnif/bandwhich" = "latest"
+xh = "latest"
+zoxide = "latest"
+{{- end }}
+
+# Parser
+{{ if eq (env "CHEZMOI_PARSER" | default "true") "true" -}}
+jq = "latest"
+yq = "latest"
+{{- end }}
+
+# Spell Checker
+{{ if eq (env "CHEZMOI_SPELL_CHECKER" | default "true") "true" -}}
+typos = "latest"
+{{- end }}
+
+# Docker
+{{ if eq (env "CHEZMOI_DOCKER" | default "true") "true" -}}
+dagger = "latest"
+lazydocker = "latest"
+{{- end }}
+
+# Python
+{{ if eq (env "CHEZMOI_PYTHON" | default "true") "true" -}}
+uv = "latest"
+ruff = "latest"
+{{- end }}
+
+[settings]
+disable_tools = ["python"]
