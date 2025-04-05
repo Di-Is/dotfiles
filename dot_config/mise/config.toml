@@ -1,6 +1,6 @@
 [tools]
-"aqua:ClementTsang/bottom" = "latest"
 bat = "latest"
+bottom = "latest"
 eza = "latest"
 dust = "latest"
 duf = "latest"
