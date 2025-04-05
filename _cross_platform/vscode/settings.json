@@ -51,5 +51,6 @@
         "**/CHANGELOG*": true,
         "**/LICENSE*": true,
         "**/uv.lock": true
-    }
+    },
+    "mise.configureExtensionsAutomatically": false
 }
