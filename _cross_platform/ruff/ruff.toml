@@ -4,6 +4,7 @@ indent-width = 4
 [lint]
 select = ["ALL"]
 fixable = ["ALL"]
+unfixable = ["F401"]
 ignore = [
     # ...: use ruff formatter
     "W191",
