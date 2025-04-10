@@ -8,8 +8,7 @@ alias dc="docker compose"
 alias dcb="docker compose build"
 alias dcu="docker compose up"
 alias dcd="docker compose down"
+alias dcp="docker compose pull"
 
 # shell completion
-if command -v docker >/dev/null 2>&1; then
-    on_demand_completion docker
-fi
+on_demand_completion docker
