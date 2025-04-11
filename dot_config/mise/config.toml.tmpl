@@ -4,6 +4,11 @@
 starship = "latest"
 usage = "latest"
 
+# Git
+{{ if eq (env "CHEZMOI_GIT" | default "true") "true" -}}
+lefthook = "latest"
+{{- end }}
+
 # Replacements for Unix CLI tools
 {{ if eq (env "CHEZMOI_REPLACEMENTS_UNIX_CLI" | default "true") "true" -}}
 bat = "latest"
