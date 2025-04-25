@@ -1,42 +1,55 @@
-line-length = 99
+exclude = []
 indent-width = 4
+line-length = 99
 
 [lint]
-select = ["ALL"]
 fixable = ["ALL"]
-unfixable = ["F401"]
 ignore = [
-    # ...: use ruff formatter
-    "W191",
-    "E111",
-    "E114",
-    'E117',
-    "D206",
-    "D300",
-    "Q000",
-    "Q001",
-    "Q002",
-    'Q003',
-    "COM812",
-    "COM819",
-    "ISC002",
-    # incorrect-blank-line-before-class/multi-line-summary-second-line: use google style docstring
-    "D203",
-    "D213",
-    # line-too-long: to avoid long strings detecttion.
-    "E501",
-    # shebang-missing-python: uv incompatible legacy rule.
-    "EXE003",
-    # line-contains-todo/missing-todo-link: too high cost
-    "FIX002",
-    "TD003",
+  # ...: To avoid conflicts with the ruff formatter
+  # Ref. https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+  "W191",
+  "E111",
+  "E114",
+  "E117",
+  "D206",
+  "Q000",
+  "Q001",
+  "Q002",
+  "Q003",
+  "COM812",
+  "COM819",
+  "ISC001",
+  # subprocess-without-shell-equals-true: Due to the high false positive rate
+  # Ref. https://github.com/astral-sh/ruff/issues/4045
+  "S603",
+  # pandas-use-of-dot-values: Because over-detection is observed for variables other than pandas.Dataframe
+  # Ref. https://github.com/astral-sh/ruff/issues/6432
+  "PD011",
+  # line-too-long: Some parts, such as comments, are not formatted in ruff's formatter, and whether or not they are formatted is not important.
+  "E501",
+  # shebang-missing-python: because it is a legacy rule that does not adapt to uv
+  "EXE003",
+  # line-contains-todo/missing-todo-link: too high management cost
+  "FIX002",
+  "TD003",
+  # ambiguous-unicode-character-string/docstring/comment: To miss-detect hiragana and katakana
+  "RUF001",
+  "RUF002",
+  "RUF003",
 ]
+select = ["ALL"]
 
 [format]
 docstring-code-format = true
-quote-style = "double"
+docstring-code-line-length = "dynamic"
 indent-style = "space"
+line-ending = "auto"
+quote-style = "double"
 
-[lint.extend-per-file-ignores]
+[lint.pydocstyle]
+convention = "google"
+
+[lint.per-file-ignores]
 "__init__.py" = ["E402"]
-"**/tests/*.py" = ["S101", "ANN201", "INP001"]
+"**/docs/*" = ["INP001"]
+"**/tests/*.py" = ["S101", "INP001"]
