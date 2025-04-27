@@ -27,8 +27,6 @@ ignore = [
   "PD011",
   # line-too-long: Some parts, such as comments, are not formatted in ruff's formatter, and whether or not they are formatted is not important.
   "E501",
-  # shebang-missing-python: because it is a legacy rule that does not adapt to uv
-  "EXE003",
   # line-contains-todo/missing-todo-link: too high management cost
   "FIX002",
   "TD003",
