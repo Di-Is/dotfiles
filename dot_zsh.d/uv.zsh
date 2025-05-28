@@ -13,6 +13,7 @@ alias uvpy="uv python"
 alias uva="uv add"
 alias uvrm="uv remove"
 alias uvsu="uv self update"
+alias uvv="uv version"
 
 # shell completion
 on_demand_completion "uv" "uv generate-shell-completion zsh"
