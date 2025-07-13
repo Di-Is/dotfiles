@@ -7,6 +7,7 @@ usage = "latest"
 # Git
 {{ if eq (env "CHEZMOI_GIT" | default "true") "true" -}}
 lefthook = "latest"
+gh = "latest"
 {{- end }}
 
 # Replacements for Unix CLI tools
