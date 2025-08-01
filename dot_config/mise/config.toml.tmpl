@@ -50,5 +50,11 @@ uv = "latest"
 ruff = "latest"
 {{- end }}
 
+# Claude
+{{ if eq (env "CHEZMOI_CLAUDE" | default "true") "true" -}}
+"npm:ccusage" = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
+{{- end }}
+
 [settings]
 disable_tools = ["python"]
