@@ -54,7 +54,6 @@ ruff = "latest"
 {{ if eq (env "CHEZMOI_CLAUDE" | default "true") "true" -}}
 "npm:ccusage" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
-"npm:tsumiki" = "latest"
 {{- end }}
 
 [settings]
