@@ -56,5 +56,10 @@ ruff = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 {{- end }}
 
+# Codex
+{{ if eq (env "CHEZMOI_CODEX" | default "true") "true" -}}
+"npm:@openai/codex" = "latest"
+{{- end }}
+
 [settings]
 disable_tools = ["python"]
