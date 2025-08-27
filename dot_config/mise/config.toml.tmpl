@@ -50,6 +50,11 @@ uv = "latest"
 ruff = "latest"
 {{- end }}
 
+# Node.js
+{{ if eq (env "CHEZMOI_NODEJS" | default "true") "true" -}}
+node = "24"
+{{- end }}
+
 # Claude
 {{ if eq (env "CHEZMOI_CLAUDE" | default "true") "true" -}}
 "npm:ccusage" = "latest"
