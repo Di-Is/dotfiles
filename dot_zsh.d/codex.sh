@@ -1,0 +1,2 @@
+# alias
+alias co="codex"
