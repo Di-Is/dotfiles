@@ -1,0 +1,7 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir'); cd \"$cwd\" 2>/dev/null && starship prompt | tr -d '%{%}' | head -1"
+  },
+  "alwaysThinkingEnabled": true
+}
