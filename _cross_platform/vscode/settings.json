@@ -31,6 +31,10 @@
         "editor.defaultFormatter": "dprint.dprint",
         "editor.formatOnSave": true
     },
+    "[markdown]": {
+        "editor.defaultFormatter": "dprint.dprint",
+        "editor.formatOnSave": true
+    },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format",
         "editor.formatOnSave": true
