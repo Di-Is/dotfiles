@@ -38,6 +38,11 @@ yq = "latest"
 typos = "latest"
 {{- end }}
 
+# Generic formatter
+{{ if eq (env "CHEZMOI_UNIVERSAL_FORMATTER" | default "true") "true" -}}
+dprint = "latest"
+{{- end }}
+
 # Docker
 {{ if eq (env "CHEZMOI_DOCKER" | default "true") "true" -}}
 dagger = "latest"
