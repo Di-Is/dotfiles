@@ -44,7 +44,8 @@
     "terminal.integrated.fontSize": 14,
     "files.associations": {
         "*.sh.tmpl": "sh",
-        "*.toml.tmpl": "toml"
+        "*.toml.tmpl": "toml",
+        "*.llc": "json"
     },
     "files.insertFinalNewline": true,
     "search.exclude": {
@@ -56,5 +57,9 @@
         "**/LICENSE*": true,
         "**/uv.lock": true
     },
-    "mise.configureExtensionsAutomatically": false
+    "mise.configureExtensionsAutomatically": false,
+    "files.exclude": {
+        ".mypy_cache": true,
+        ".ruff_cache": true
+    },
 }
