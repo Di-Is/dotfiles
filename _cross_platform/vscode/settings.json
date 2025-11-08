@@ -60,6 +60,7 @@
     "mise.configureExtensionsAutomatically": false,
     "files.exclude": {
         ".mypy_cache": true,
-        ".ruff_cache": true
+        ".ruff_cache": true,
+        ".benchmarks": true
     },
 }
