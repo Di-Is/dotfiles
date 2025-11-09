@@ -61,6 +61,7 @@
     "files.exclude": {
         ".mypy_cache": true,
         ".ruff_cache": true,
-        ".benchmarks": true
+        ".benchmarks": true,
+        "__pycache__": true
     },
 }
