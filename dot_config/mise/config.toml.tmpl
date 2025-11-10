@@ -68,7 +68,7 @@ node = "24"
 
 # Codex
 {{ if eq (env "CHEZMOI_CODEX" | default "true") "true" -}}
-"npm:@openai/codex" = "latest"
+"ubi:openai/codex" = { version = "latest", matching_regex = "^codex-(x86_64|aarch64|arm64|amd64|i686).*" }
 {{- end }}
 
 [settings]
