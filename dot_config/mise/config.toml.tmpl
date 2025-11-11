@@ -63,7 +63,7 @@ node = "24"
 # Claude
 {{ if eq (env "CHEZMOI_CLAUDE" | default "true") "true" -}}
 "npm:ccusage" = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
+claude = "latest"
 {{- end }}
 
 # Codex
