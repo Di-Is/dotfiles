@@ -8,6 +8,7 @@ usage = "latest"
 {{ if eq (env "CHEZMOI_GIT" | default "true") "true" -}}
 lefthook = "latest"
 gh = "latest"
+lazygit = "latest"
 {{- end }}
 
 # Replacements for Unix CLI tools
@@ -47,11 +48,6 @@ dprint = "latest"
 {{ if eq (env "CHEZMOI_DOCKER" | default "true") "true" -}}
 dagger = "latest"
 lazydocker = "latest"
-{{- end }}
-
-# Git
-{{ if eq (env "CHEZMOI_GIT" | default "true") "true" -}}
-lazygit = "latest"
 {{- end }}
 
 # Python
