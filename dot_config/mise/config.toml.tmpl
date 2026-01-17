@@ -49,6 +49,11 @@ dagger = "latest"
 lazydocker = "latest"
 {{- end }}
 
+# Git
+{{ if eq (env "CHEZMOI_GIT" | default "true") "true" -}}
+lazygit = "latest"
+{{- end }}
+
 # Python
 {{ if eq (env "CHEZMOI_PYTHON" | default "true") "true" -}}
 uv = "latest"
