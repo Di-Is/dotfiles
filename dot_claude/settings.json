@@ -1,7 +1,25 @@
 {
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline.sh"
+    "command": "~/.local/bin/starship-claude"
   },
-  "alwaysThinkingEnabled": true
+  "enabledPlugins": {
+    "deslop@kuu-marketplace": true,
+    "dig@kuu-marketplace": true,
+    "fix-ci@kuu-marketplace": true,
+    "decomposition@kuu-marketplace": true,
+    "feature-dev@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }

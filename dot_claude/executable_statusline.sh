@@ -3,51 +3,55 @@
 input=$(cat)
 cwd=$(echo "$input" | jq -r '.workspace.current_dir')
 model=$(echo "$input" | jq -r '.model.display_name // "unknown"')
+pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
+cost=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
+duration_ms=$(echo "$input" | jq -r '.cost.total_duration_ms // 0')
 
-# Starship prompt
-starship_out=""
 if cd "$cwd" 2>/dev/null; then
-  starship_out=$(starship prompt | tr -d '%{%}' | head -1)
+  starship prompt | tr -d '%{%}' | head -1
 fi
 
-# Context usage calculation from session logs
-context_percent=""
-session_dir="$HOME/.claude/projects"
+# colors
+RESET='\033[0m'
+DIM='\033[2m'
+BG1='\033[48;5;238m'
+BG2='\033[48;5;236m'
+BG3='\033[48;5;234m'
+WHITE='\033[97m'
 
-if [[ -d "$session_dir" ]]; then
-  # Find the most recent JSONL file
-  latest_log=$(find "$session_dir" -name "*.jsonl" -type f -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -1 | cut -d' ' -f2-)
-
-  if [[ -n "$latest_log" && -f "$latest_log" ]]; then
-    # Get only the LAST usage entry (cumulative value)
-    last_usage=$(grep '"usage"' "$latest_log" 2>/dev/null | tail -1)
-
-    if [[ -n "$last_usage" ]]; then
-      input_tokens=$(echo "$last_usage" | grep -o '"input_tokens":[0-9]*' | grep -o '[0-9]*')
-      cache_create=$(echo "$last_usage" | grep -o '"cache_creation_input_tokens":[0-9]*' | grep -o '[0-9]*')
-      cache_read=$(echo "$last_usage" | grep -o '"cache_read_input_tokens":[0-9]*' | grep -o '[0-9]*')
-
-      input_tokens=${input_tokens:-0}
-      cache_create=${cache_create:-0}
-      cache_read=${cache_read:-0}
-
-      total=$((input_tokens + cache_create + cache_read))
-
-      # Add reserved tokens offset
-      reserved=45000
-      total=$((total + reserved))
-
-      # Default context window: 200k tokens
-      max_context=200000
-
-      if [[ $total -gt 0 ]]; then
-        percent=$((total * 100 / max_context))
-        [[ $percent -gt 100 ]] && percent=100
-        context_percent="${percent}%"
-      fi
-    fi
-  fi
+# context usage color
+if [ "$pct" -ge 90 ]; then
+  CTX_FG='\033[91m'
+elif [ "$pct" -ge 70 ]; then
+  CTX_FG='\033[93m'
+else
+  CTX_FG='\033[92m'
 fi
 
-# Output: starship + [model name] - [context usage: XX%]
-echo "${starship_out} [model: ${model}] - [context usage: ${context_percent:-0%}]"
+# progress bar
+bar_width=15
+filled=$((pct * bar_width / 100))
+empty=$((bar_width - filled))
+
+if [ "$pct" -ge 90 ]; then
+  BG_FILL='\033[41m'
+elif [ "$pct" -ge 70 ]; then
+  BG_FILL='\033[43m'
+else
+  BG_FILL='\033[42m'
+fi
+BG_EMPTY='\033[100m'
+
+filled_part=$(printf "%${filled}s")
+empty_part=$(printf "%${empty}s")
+
+# elapsed time
+mins=$((duration_ms / 60000))
+secs=$(((duration_ms % 60000) / 1000))
+
+printf "${BG1}${WHITE} ${model} ${RESET}"
+printf "${BG2}${WHITE} Cost: \$$(printf '%.2f' "$cost") ${RESET}"
+printf "${BG3}${WHITE} ${BG_FILL}${filled_part}${RESET}${BG_EMPTY}${empty_part}${RESET}"
+printf " ${CTX_FG}Ctx: ${pct}%%${RESET}"
+printf "${DIM} ${mins}m${secs}s${RESET}"
+echo
