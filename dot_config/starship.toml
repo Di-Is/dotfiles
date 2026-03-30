@@ -1,11 +1,28 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+palette = "custom"
 add_newline = false
 
+format = """
+$directory\
+$git_branch\
+$git_status
+$all"""
+
 [directory]
-truncation_length = 5
+style = "bold fg:blue"
+truncation_length = 3
 truncate_to_repo = false
 truncation_symbol = "…/"
+
+[git_branch]
+style = "fg:purple"
+
+[git_status]
+style = "fg:purple"
+
+[username]
+disabled = true
 
 [hostname]
 disabled = true
@@ -13,6 +30,9 @@ disabled = true
 [container]
 format = '[$symbol]($style) '
 style = 'green bold dimmed'
+
+[package]
+format = "[$symbol$version]($style) "
 
 [python]
 disabled = true
@@ -23,3 +43,24 @@ when = 'find_python_project'
 style = 'yellow bold'
 symbol = '🐍 '
 format = 'via [$symbol($output )]($style)'
+
+# Tokyo Night palette (tokyonight.nvim)
+[palettes.custom]
+background = '#1a1b26'
+foreground = '#c0caf5'
+black = '#15161e'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+purple = '#bb9af7'
+cyan = '#7dcfff'
+white = '#a9b1d6'
+bright-black = '#414868'
+bright-red = '#ff899d'
+bright-green = '#9fe044'
+bright-yellow = '#faba4a'
+bright-blue = '#8db0ff'
+bright-purple = '#c7a9ff'
+bright-cyan = '#a4daff'
+bright-white = '#c0caf5'
