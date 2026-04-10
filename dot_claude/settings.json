@@ -1,4 +1,8 @@
 {
+  "env": {
+    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  },
   "statusLine": {
     "type": "command",
     "command": "~/.local/bin/starship-claude"
@@ -8,7 +12,8 @@
     "dig@kuu-marketplace": true,
     "fix-ci@kuu-marketplace": true,
     "decomposition@kuu-marketplace": true,
-    "feature-dev@claude-plugins-official": true
+    "feature-dev@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -21,5 +26,15 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "voiceEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "autoMemoryEnabled": false,
+  "autoDreamEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
+  "network": {
+    "network.allowedDomains": [
+      "github.com",
+      "api.github.com",
+      "*.githubusercontent.com"
+    ]
+  },
+  "model": "sonnet"
 }
