@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+#
+set -o errexit -o nounset -o pipefail
+
+HAIKU="◇ haiku"
+SONNET="◈ sonnet"
+OPUS="◆ opus"
+
+payload="$(cat || true)"
+
+if ! command -v jq >/dev/null 2>&1 || [ -z "$payload" ]; then
+  STARSHIP_CONFIG="$HOME/.claude/starship.toml" STARSHIP_SHELL=sh starship prompt
+  exit 0
+fi
+
+jq_output="$(printf '%s' "$payload" | jq -r '
+  [
+    (.model.display_name // .model.id // ""),                                # 0: model
+    (.cost.total_cost_usd // ""),                                            # 1: cost
+    (.cost.total_lines_added // ""),                                         # 2: lines added
+    (.cost.total_lines_removed // ""),                                       # 3: lines removed
+    (.context_window.context_window_size // ""),                              # 4: context size
+    (if .context_window.current_usage == null then ""
+     else (.context_window.current_usage.input_tokens // 0) end),            # 5: input tokens
+    (if .context_window.current_usage == null then ""
+     else (.context_window.current_usage.cache_creation_input_tokens // 0) end), # 6: cache creation
+    (if .context_window.current_usage == null then ""
+     else (.context_window.current_usage.cache_read_input_tokens // 0) end), # 7: cache read
+    (.workspace.current_dir // .workspace.project_dir // .cwd // ""),        # 8: directory
+    (.rate_limits.five_hour.used_percentage // ""),                           # 9: 5h usage
+    (.rate_limits.seven_day.used_percentage // "")                           # 10: 7d usage
+  ] | .[]
+')"
+
+values=("" "" "" "" "" "" "" "" "" "" "")
+if [ -n "$jq_output" ]; then
+  if command -v mapfile >/dev/null 2>&1; then
+    mapfile -t values <<<"$jq_output"
+  else
+    i=0
+    while IFS= read -r line; do
+      values[i]="$line"
+      i=$((i + 1))
+    done <<<"$jq_output"
+  fi
+fi
+
+dir="${values[8]:-}"
+if [ -n "$dir" ] && [ -d "$dir" ]; then
+  cd "$dir"
+fi
+
+raw_model="${values[0]:-}"
+if [ -n "$raw_model" ]; then
+  lower_model="${raw_model,,}"
+  case "$lower_model" in
+  *haiku*) export CLAUDE_MODEL="$HAIKU" ;;
+  *sonnet*) export CLAUDE_MODEL="$SONNET" ;;
+  *opus*) export CLAUDE_MODEL="$OPUS" ;;
+  *) export CLAUDE_MODEL="$raw_model" ;;
+  esac
+fi
+
+raw_cost="${values[1]:-}"
+if [ -n "$raw_cost" ]; then
+  export CLAUDE_COST="$(printf '$%.2f' "$raw_cost")"
+fi
+
+export CLAUDE_LINES_ADDED="${values[2]:-}"
+export CLAUDE_LINES_REMOVED="${values[3]:-}"
+
+progress_bar() {
+  local pct=$(printf '%.0f' "$1")
+  local width=10
+  local filled=$((pct * width / 100))
+  [ "$filled" -gt "$width" ] && filled=$width
+  local empty=$((width - filled))
+  local bar=""
+  for ((j=0; j<filled; j++)); do bar+="▰"; done
+  for ((j=0; j<empty; j++)); do bar+="▱"; done
+  printf '%s %d%%' "$bar" "$pct"
+}
+
+context_size="${values[4]:-}"
+input_tokens="${values[5]:-}"
+cache_creation="${values[6]:-}"
+cache_read="${values[7]:-}"
+
+if [ -n "$context_size" ] && [ "$context_size" != "null" ] && [ -n "$input_tokens" ]; then
+  current_tokens=$((${input_tokens:-0} + ${cache_creation:-0} + ${cache_read:-0}))
+  if [ "$current_tokens" -gt 0 ]; then
+    percent_used=$((current_tokens * 100 / context_size))
+    export CLAUDE_CONTEXT="$(progress_bar "$percent_used")"
+  else
+    export CLAUDE_CONTEXT=""
+  fi
+else
+  export CLAUDE_CONTEXT=""
+fi
+
+five_h="${values[9]:-}"
+seven_d="${values[10]:-}"
+if [ -n "$five_h" ]; then
+  export CLAUDE_5H="$(progress_bar "$five_h")"
+fi
+if [ -n "$seven_d" ]; then
+  export CLAUDE_7D="$(progress_bar "$seven_d")"
+fi
+
+STARSHIP_CONFIG="$HOME/.claude/starship.toml" STARSHIP_SHELL=sh starship prompt
