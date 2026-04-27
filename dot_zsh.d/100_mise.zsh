@@ -8,6 +8,8 @@ alias mr='mise run'
 alias mt='mise task'
 alias mi='mise install'
 alias ml='mise list'
+alias msp='mise self-update'
+alias mp='mise upgrade'
 
 # shell completion
 on_demand_completion "mise"
