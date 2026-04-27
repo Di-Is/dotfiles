@@ -1,0 +1,88 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+palette = "custom"
+add_newline = false
+
+format = """
+$directory \
+$git_branch$git_status
+${env_var.CLAUDE_MODEL} [|](fg:bright-black) \
+${env_var.CLAUDE_CONTEXT} [|](fg:bright-black) \
+${env_var.CLAUDE_COST} [|](fg:bright-black) \
+${env_var.CLAUDE_5H}[|](fg:bright-black) \
+${env_var.CLAUDE_7D}[|](fg:bright-black) \
+${env_var.CLAUDE_LINES_ADDED}\
+${env_var.CLAUDE_LINES_REMOVED}\
+"""
+
+[directory]
+style = "bold fg:blue"
+format = "[$path]($style)"
+truncation_length = 3
+truncate_to_repo = false
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "fg:purple"
+format = "[$branch]($style)"
+
+[git_status]
+style = "fg:purple"
+format = "[($all_status$ahead_behind)]($style)"
+
+[env_var.CLAUDE_MODEL]
+variable = "CLAUDE_MODEL"
+format = "[Model: $env_value]($style)"
+style = "fg:cyan"
+
+[env_var.CLAUDE_CONTEXT]
+variable = "CLAUDE_CONTEXT"
+format = "[Ctx: $env_value]($style)"
+style = "fg:green"
+
+[env_var.CLAUDE_COST]
+variable = "CLAUDE_COST"
+format = "[Cost: $env_value]($style)"
+style = "fg:yellow"
+
+[env_var.CLAUDE_5H]
+variable = "CLAUDE_5H"
+format = "[5h $env_value ](fg:$style)"
+style = "cyan"
+
+[env_var.CLAUDE_7D]
+variable = "CLAUDE_7D"
+format = "[7d $env_value ](fg:$style)"
+style = "cyan"
+
+[env_var.CLAUDE_LINES_ADDED]
+variable = "CLAUDE_LINES_ADDED"
+format = "[+$env_value ]($style)"
+style = "fg:green"
+
+[env_var.CLAUDE_LINES_REMOVED]
+variable = "CLAUDE_LINES_REMOVED"
+format = "[-$env_value]($style)"
+style = "fg:red"
+
+# Tokyo Night palette (tokyonight.nvim)
+[palettes.custom]
+background = '#1a1b26'
+foreground = '#c0caf5'
+black = '#15161e'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+purple = '#bb9af7'
+cyan = '#7dcfff'
+white = '#a9b1d6'
+bright-black = '#414868'
+bright-red = '#ff899d'
+bright-green = '#9fe044'
+bright-yellow = '#faba4a'
+bright-blue = '#8db0ff'
+bright-purple = '#c7a9ff'
+bright-cyan = '#a4daff'
+bright-white = '#c0caf5'
