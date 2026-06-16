@@ -46,7 +46,6 @@ dprint = "latest"
 
 # Docker
 {{ if eq (env "CHEZMOI_DOCKER" | default "true") "true" -}}
-dagger = "latest"
 lazydocker = "latest"
 {{- end }}
 
