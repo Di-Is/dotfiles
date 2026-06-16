@@ -6,7 +6,8 @@ add_newline = false
 format = """
 $directory\
 $git_branch\
-$git_status
+$git_status\
+${custom.git_pr}
 $all"""
 
 [directory]
@@ -20,6 +21,14 @@ style = "fg:purple"
 
 [git_status]
 style = "fg:purple"
+
+[custom.git_pr]
+command = "starship-git-pr"
+when = "git rev-parse --is-inside-work-tree"
+style = "fg:cyan"
+format = "( [$output]($style))"
+ignore_timeout = true
+description = "Show GitHub PR or GitLab MR number for the current branch"
 
 [username]
 disabled = true

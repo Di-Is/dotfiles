@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+# starship-git-pr: print "PR #N" or "MR #N" (with OSC 8 link on "#N") for the
+# current branch's PR/MR.
+#
+# Architecture: stale-while-revalidate.
+#   - Any cached value is returned immediately (TTL-independent).
+#   - When the cache is older than CACHE_TTL or missing, a background refresh
+#     is fired so the next prompt sees fresh data. The foreground call never
+#     blocks on `gh`/`glab`.
+#   - A lock dir prevents concurrent refreshes from piling up under rapid
+#     prompts in a stale repo.
+#   - Negative results (no PR/MR) are cached as empty files.
+#
+# Provider detection: github → gh, gitlab → glab. Other hosts probe each
+# CLI's `auth status --hostname` and use whichever is authenticated.
+
+set -u
+
+CACHE_TTL=30
+CLI_TIMEOUT=5
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/starship/git-review"
+
+run_git() {
+    git "$@" 2>/dev/null
+}
+
+cache_mtime() {
+    stat -f %m "$1" 2>/dev/null || stat -c %Y "$1" 2>/dev/null || echo 0
+}
+
+# Heavy lifting: hits gh/glab and writes the cache. Always run in the
+# background so it never delays the prompt. Caller is responsible for the
+# EXIT trap that cleans up tmp + lock.
+refresh_cache() {
+    local cwd="$1" cache_file="$2" tmp="$3"
+    local origin_url host
+    origin_url="$(cd "$cwd" && run_git remote get-url -- origin)"
+    host=""
+    if [ -n "$origin_url" ]; then
+        # Pure-bash URL host extraction (no fork).
+        local h="${origin_url#*://}"   # https://
+        h="${h#*@}"                    # ssh user@
+        h="${h%%[:/]*}"                # strip path
+        host="$(printf '%s' "$h" | tr '[:upper:]' '[:lower:]')"
+    fi
+
+    local -a candidates=()
+    case "$host" in
+        *github*) candidates=(gh) ;;
+        *gitlab*) candidates=(glab) ;;
+        "")       candidates=(gh glab) ;;
+        *)
+            if command -v glab >/dev/null 2>&1 \
+                && timeout "$CLI_TIMEOUT" glab auth status --hostname "$host" >/dev/null 2>&1; then
+                candidates+=(glab)
+            fi
+            if command -v gh >/dev/null 2>&1 \
+                && timeout "$CLI_TIMEOUT" gh auth status --hostname "$host" >/dev/null 2>&1; then
+                candidates+=(gh)
+            fi
+            ;;
+    esac
+
+    local noun="" num="" url="" cli out json mr_num mr_url
+    for cli in ${candidates[@]+"${candidates[@]}"}; do
+        command -v "$cli" >/dev/null 2>&1 || continue
+        case "$cli" in
+            gh)
+                out="$(cd "$cwd" && timeout "$CLI_TIMEOUT" gh pr view --json number,url \
+                    -q '"\(.number)\t\(.url)"' 2>/dev/null)"
+                if [ -n "$out" ]; then
+                    noun="PR"; num="${out%%	*}"; url="${out#*	}"
+                    break
+                fi
+                ;;
+            glab)
+                json="$(cd "$cwd" && timeout "$CLI_TIMEOUT" glab mr view --output json 2>/dev/null)"
+                mr_num="$(printf '%s' "$json" | sed -nE 's/.*"iid":[[:space:]]*([0-9]+).*/\1/p' | head -1)"
+                mr_url="$(printf '%s' "$json" | sed -nE 's/.*"web_url":[[:space:]]*"([^"]+)".*/\1/p' | head -1)"
+                if [ -n "$mr_num" ] && [ -n "$mr_url" ]; then
+                    noun="MR"; num="$mr_num"; url="$mr_url"
+                    break
+                fi
+                ;;
+        esac
+    done
+
+    local label=""
+    if [ -n "$num" ]; then
+        label="$(printf '%s \e]8;;%s\e\\#%s\e]8;;\e\\' "$noun" "$url" "$num")"
+    fi
+
+    # Atomic rename: prevents a foreground reader seeing a partial write.
+    printf '%s' "$label" >"$tmp" && mv -f "$tmp" "$cache_file"
+}
+
+# Internal entry point for backgrounded refresh. Trap lives here (not in the
+# function) so locals stay in scope when EXIT fires after `refresh_cache`
+# returns.
+if [ "${1:-}" = "__refresh" ]; then
+    bg_cwd="$2" bg_cache_file="$3" bg_lock_dir="$4"
+    bg_tmp="$bg_cache_file.$$.tmp"
+
+    # Self-acquire the lock; bail (or steal stale lock) if another worker is
+    # already running. Foreground also pre-checks; this is belt-and-suspenders
+    # against races.
+    if ! mkdir "$bg_lock_dir" 2>/dev/null; then
+        bg_lock_age=$(( $(date +%s) - $(cache_mtime "$bg_lock_dir") ))
+        [ "$bg_lock_age" -lt "$CLI_TIMEOUT" ] && exit 0
+        rm -rf "$bg_lock_dir" 2>/dev/null
+        mkdir "$bg_lock_dir" 2>/dev/null || exit 0
+    fi
+    trap 'rm -f "$bg_tmp" 2>/dev/null; rmdir "$bg_lock_dir" 2>/dev/null' EXIT
+
+    refresh_cache "$bg_cwd" "$bg_cache_file" "$bg_tmp"
+    exit 0
+fi
+
+if ! run_git rev-parse --is-inside-work-tree >/dev/null; then
+    exit 0
+fi
+
+cwd="$(pwd -P)"
+branch="$(run_git branch --show-current)"
+ref="${branch:-$(run_git rev-parse --short HEAD)}"
+[ -z "$ref" ] && exit 0
+
+# cksum is built into coreutils on every supported platform - cheaper than
+# spawning shasum (Perl/openssl) on the prompt path.
+key="$(printf '%s\0%s' "$cwd" "$ref" | cksum | tr -d ' \n')"
+cache_file="$CACHE_DIR/git-review-$key"
+lock_dir="$cache_file.lock.d"
+
+needs_refresh=1
+if [ -f "$cache_file" ]; then
+    cat "$cache_file"
+    age=$(( $(date +%s) - $(cache_mtime "$cache_file") ))
+    [ "$age" -lt "$CACHE_TTL" ] && needs_refresh=0
+fi
+
+if [ "$needs_refresh" -eq 1 ]; then
+    # Skip if a fresh refresh is already in flight.
+    if [ -d "$lock_dir" ]; then
+        lock_age=$(( $(date +%s) - $(cache_mtime "$lock_dir") ))
+        [ "$lock_age" -lt "$CLI_TIMEOUT" ] && exit 0
+    fi
+    mkdir -p "$CACHE_DIR"
+    if command -v setsid >/dev/null 2>&1; then
+        setsid "$0" __refresh "$cwd" "$cache_file" "$lock_dir" </dev/null >/dev/null 2>&1 &
+    else
+        nohup "$0" __refresh "$cwd" "$cache_file" "$lock_dir" </dev/null >/dev/null 2>&1 &
+    fi
+    disown 2>/dev/null || true
+fi
