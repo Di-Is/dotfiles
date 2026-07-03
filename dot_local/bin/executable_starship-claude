@@ -52,7 +52,7 @@ fi
 
 raw_model="${values[0]:-}"
 if [ -n "$raw_model" ]; then
-  lower_model="${raw_model,,}"
+  lower_model="$(printf '%s' "$raw_model" | tr '[:upper:]' '[:lower:]')"
   case "$lower_model" in
   *haiku*) export CLAUDE_MODEL="$HAIKU" ;;
   *sonnet*) export CLAUDE_MODEL="$SONNET" ;;
