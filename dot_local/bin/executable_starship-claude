@@ -5,6 +5,7 @@ set -o errexit -o nounset -o pipefail
 HAIKU="◇ haiku"
 SONNET="◈ sonnet"
 OPUS="◆ opus"
+FABLE="❖ fable"
 
 payload="$(cat || true)"
 
@@ -57,6 +58,7 @@ if [ -n "$raw_model" ]; then
   *haiku*) export CLAUDE_MODEL="$HAIKU" ;;
   *sonnet*) export CLAUDE_MODEL="$SONNET" ;;
   *opus*) export CLAUDE_MODEL="$OPUS" ;;
+  *fable*) export CLAUDE_MODEL="$FABLE" ;;
   *) export CLAUDE_MODEL="$raw_model" ;;
   esac
 fi
