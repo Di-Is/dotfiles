@@ -3,6 +3,7 @@
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
+  "model": "sonnet",
   "statusLine": {
     "type": "command",
     "command": "~/.local/bin/starship-claude"
@@ -23,18 +24,19 @@
       }
     }
   },
+  "language": "英語直訳では無い自然な文体の日本語",
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
-  "voiceEnabled": true,
+  "effortLevel": "medium",
   "autoMemoryEnabled": false,
   "autoDreamEnabled": false,
   "skipDangerousModePermissionPrompt": true,
+  "switchModelsOnFlag": false,
+  "voiceEnabled": true,
   "network": {
     "network.allowedDomains": [
       "github.com",
       "api.github.com",
       "*.githubusercontent.com"
     ]
-  },
-  "model": "sonnet"
+  }
 }

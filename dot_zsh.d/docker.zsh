@@ -7,6 +7,7 @@ alias dph="docker push"
 alias dps="docker ps"
 
 alias dco="docker compose"
+alias dcp="docker compose"
 alias dcb="docker compose build"
 alias dcu="docker compose up"
 alias dcd="docker compose down"
