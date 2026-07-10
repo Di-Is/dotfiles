@@ -69,13 +69,14 @@ claude = "latest"
 
 # Codex
 {{ if eq (env "CHEZMOI_CODEX" | default "true") "true" -}}
-codex = "latest"
+"aqua:openai/codex" = "latest"
 {{- end }}
+trivy = "latest"
 
 [settings]
 disable_tools = ["python"]
 python.uv_venv_auto = true
-minimum_release_age_excludes = ["claude", "codex"]
+minimum_release_age_excludes = ["claude", "aqua:openai/codex"]
 
 [env]
 DISABLE_AUTOUPDATER = "1"
