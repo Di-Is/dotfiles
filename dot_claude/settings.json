@@ -3,7 +3,7 @@
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
-  "model": "sonnet",
+  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "~/.local/bin/starship-claude"
