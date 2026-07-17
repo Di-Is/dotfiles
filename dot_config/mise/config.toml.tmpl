@@ -1,6 +1,7 @@
 [tools]
 # Core
-"github:rossmacarthur/sheldon" = "latest"
+# no Windows build (zsh plugin manager)
+"github:rossmacarthur/sheldon" = { version = "latest", os = ["linux", "macos"] }
 starship = "latest"
 usage = "latest"
 
@@ -18,7 +19,8 @@ bat = "latest"
 bottom = "latest"
 duf = "latest"
 dust = "latest"
-eza = "latest"
+# Windows install falls back to cargo build
+eza = { version = "latest", os = ["linux", "macos"] }
 fd = "latest"
 fzf = "latest"
 hyperfine = "latest"
