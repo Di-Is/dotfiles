@@ -53,6 +53,7 @@
         "**/.vscode": true,
         "**/*.csv": true,
         "**/*.svg": true,
+        "**/.*.cache": true,
         "**/CHANGELOG*": true,
         "**/LICENSE*": true,
         "**/uv.lock": true
