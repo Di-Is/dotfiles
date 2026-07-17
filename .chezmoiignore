@@ -9,6 +9,9 @@ Library
 {{ if and (ne .chezmoi.os "darwin") (ne .chezmoi.os "linux") }}
 .zshrc
 .zprofile
+.zshenv
+.zsh.d/**
+.config/sheldon/**
 .chezmoiscripts/unix/**
 {{ end }}
 {{ if ne .chezmoi.os "windows" }}
