@@ -31,7 +31,7 @@ jq_output="$(printf '%s' "$payload" | jq -r '
     (.rate_limits.five_hour.used_percentage // ""),                           # 9: 5h usage
     (.rate_limits.seven_day.used_percentage // "")                           # 10: 7d usage
   ] | .[]
-')"
+' | tr -d '\r')"
 
 values=("" "" "" "" "" "" "" "" "" "" "")
 if [ -n "$jq_output" ]; then
