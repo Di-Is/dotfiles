@@ -1,0 +1,9 @@
+# mise config hash: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
+$ErrorActionPreference = "Stop"
+
+if (-not (Get-Command mise -ErrorAction SilentlyContinue)) {
+    winget install --id jdx.mise --accept-source-agreements --accept-package-agreements
+    $env:PATH = "$env:LOCALAPPDATA\Microsoft\WinGet\Links;$env:PATH"
+}
+
+mise install
