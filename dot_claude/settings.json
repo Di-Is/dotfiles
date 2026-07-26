@@ -2,7 +2,20 @@
   "env": {
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1"
   },
-  "model": "claude-fable-5[1m]",
+  "model": "opus",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/model-rules.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "switchModelsOnFlag": false,
   "statusLine": {
     "type": "command",
     "command": "~/.local/bin/starship-claude"
@@ -22,18 +35,6 @@
         "repo": "anthropics/skills"
       }
     }
-  },
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/model-rules.sh"
-          }
-        ]
-      }
-    ]
   },
   "language": "英語直訳では無い自然な文体の日本語",
   "alwaysThinkingEnabled": true,
