@@ -2,7 +2,7 @@
   "env": {
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1"
   },
-  "model": "opus",
+  "model": "claude-fable-5[1m]",
   "statusLine": {
     "type": "command",
     "command": "~/.local/bin/starship-claude"
@@ -23,9 +23,22 @@
       }
     }
   },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/model-rules.sh"
+          }
+        ]
+      }
+    ]
+  },
   "language": "英語直訳では無い自然な文体の日本語",
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
+  "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "autoDreamEnabled": false,
   "skipDangerousModePermissionPrompt": true,
